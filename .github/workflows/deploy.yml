@@ -14,6 +14,7 @@ jobs:
 
       - name: Deploy website
         run: |
+          sudo apt-get update && sudo apt-get install -y sshpass
           sshpass -p 'password' scp -r . ec2-user@34.226.190.178:/home/ec2-user/${{env.PORT}}
           sshpass -p 'password' ssh ec2-user@34.226.190.178
           sudo docker rm nginx-${{env.PORT}} --force || true
