@@ -1,0 +1,19 @@
+name: Deploy Website
+
+on: workflow_dispatch
+
+jobs:
+  deploy:
+    env:
+      PORT: '8080'
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Deploy website
+        run: |
+          cp -r Nokia-CI-CD/ /home/ubuntu/${{env.PORT}}
+          sudo docker rm nginx-${{env.PORT}} --force || true
+          sudo docker run -d -v /home/ubuntu/${{env.PORT}}:/usr/share/nginx/html:ro --name nginx-${{env.PORT}} -p ${{env.PORT}}:80 nginx
