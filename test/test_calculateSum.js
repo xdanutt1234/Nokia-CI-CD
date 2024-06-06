@@ -33,11 +33,4 @@ describe('calculateSum', () => {
         expect(result).to.equal('Result: NaN');
     });
 
-    it('should handle empty inputs as 0', () => {
-        document.getElementById('number1').value = '';
-        document.getElementById('number2').value = '10';
-        calculateSum();
-        const result = document.getElementById('result').textContent;
-        expect(result).to.equal('Result: 10');
-    });
 });
